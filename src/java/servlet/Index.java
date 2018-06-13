@@ -61,6 +61,7 @@ public class Index extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher(URL);
         rd.forward(request, response);
     }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

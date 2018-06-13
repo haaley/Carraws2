@@ -18,50 +18,62 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-  
+
 public class UsuarioDAO {
-  
-    public Usuario getSingle(String login) throws SQLException{
+
+    public Usuario getSingle(String login) throws SQLException {
         Connection conn = Conexao.open();
         PreparedStatement ps;
         ResultSet rs;
-      
-            ps = conn.prepareStatement("select idlogin, usuario, senha, nivelAcesso from login where usuario = ?");
-            ps.setString(1, login);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                
-                Usuario user = new Usuario(rs.getInt("idlogin"), rs.getString("usuario"), rs.getString("senha"), rs.getInt("nivelAcesso"));
-                System.out.println(user.getSenha());
-                return user;
-            } else
-          
+
+        ps = conn.prepareStatement("select idlogin, usuario, senha, nivelAcesso from login where usuario = ?");
+        ps.setString(1, login);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+
+            Usuario user = new Usuario(rs.getInt("idlogin"), rs.getString("usuario"), rs.getString("senha"), rs.getInt("nivelAcesso"));
+            System.out.println(user.getSenha());
+            return user;
+        } else {
             Conexao.close(rs, ps, conn);
-            
-            return null;
         }
-        
-    
-    public void insertSingle(Usuario usu) throws SQLException{
-    
+
+        return null;
+    }
+
+    public int userIDByName(String cpf) throws SQLException {
+        Connection conn = Conexao.open();
+        int id;
+        PreparedStatement ps;
+        ResultSet rs;
+
+        ps = conn.prepareStatement("select idcliente from cliente where cpf LIKE '" + cpf + "'");
+
+        rs = ps.executeQuery();
+        rs.beforeFirst();
+        rs.first();
+        id = rs.getInt("idcliente");
+
+        return id;
+    }
+
+    public void insertSingle(Usuario usu) throws SQLException {
+
         Connection conn = Conexao.open();
         PreparedStatement ps;
-       
-      
-            ps = conn.prepareStatement("INSERT INTO login (nome, email, usuario, senha) VALUES (?,?,?,?)");
-            ps.setString(1,usu.getNome());
-            ps.setString(2,usu.getEmail());
-            ps.setString(3,usu.getUsuario());
-            ps.setString(4,usu.getSenha());
 
-            ps.execute();
-          
-            Conexao.close(ps, conn);
-            
-           
-    
+        ps = conn.prepareStatement("INSERT INTO login (nome, email, usuario, senha) VALUES (?,?,?,?)");
+        ps.setString(1, usu.getNome());
+        ps.setString(2, usu.getEmail());
+        ps.setString(3, usu.getUsuario());
+        ps.setString(4, usu.getSenha());
+
+        ps.execute();
+
+        Conexao.close(ps, conn);
+
     }
-    
+
     public Usuario getSingle(Object... chave) throws Exception {
         if (chave[0] instanceof Integer) {
             Connection conn = Conexao.open();
@@ -73,7 +85,7 @@ public class UsuarioDAO {
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     return new Usuario(rs.getInt("idlogin"), rs.getString("usuario"), rs.getString("senha"), rs.getInt("nivelAcesso"));
-                    
+
                 }
                 System.out.println(rs.getString("usuario"));
             } catch (SQLException ex) {
@@ -83,11 +95,10 @@ public class UsuarioDAO {
         }
         return null;
     }
-   
-    public List<Usuario> getList() throws Exception{
+
+    public List<Usuario> getList() throws Exception {
         return getList(0);
     }
-  
 
     public List<Usuario> getList(int top) throws Exception {
         if (top < 0) {

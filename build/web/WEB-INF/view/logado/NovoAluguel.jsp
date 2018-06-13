@@ -12,7 +12,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Locadora Carraws</title>
+  <title>Cadastro Veiculo</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/adminlte.min.css">
@@ -22,23 +22,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
 
-            td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #dddddd;
-            }
-        </style>
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -48,7 +32,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="/logado/menu.jsp" class="logo">
+      <a href="localhost:8080/Carraws2/logado/menu.jsp" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">
           <b>CAR</b></span>
@@ -215,98 +199,64 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Página Principal
-          <small>Painel de controle</small>
+          Novo Aluguel
+          <small>Novo Aluguel</small>
         </h1>
         <ol class="breadcrumb">
           <li>
             <a href="#">
               <i class="fa fa-dashboard"></i>Principal</a>
           </li>
-          <li class="active">tela principal</li>
+          <li class="active">Novo Aluguel</li>
         </ol>
       </section>
       <br />
       <!-- Main content -->
       <section class="content">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->            
-            <div class="small-box bg-red">
-              <div class="inner">
-                <h3>Novo Cliente</h3>               
-                <p>Cadastrar cliente</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-user"></i>
-              </div>
-              <a href="/Carraws/logado/cadastroClientes.jsp" class="small-box-footer">
-                <i class="fa fa-arrow-circle-right"></i>
-              </a>             
-            </div>      
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-green">
-              <div class="inner">
-                <h3>Novo Veiculo </h3>
+        <div class="col-md-7 " >
+              <div class="box box-solid box-success" style="border-color: #00c0ef" >
+                            <div  class="box-header box-header with-border 11" style="background-color: #00c0ef" align="center">
+                                <h3 class="box-title" >Novo Aluguel</h3>
+                                <h3> <p style="color:green">${profilestrength}</p></h3>
+                            </div>
+                            <div class="box-body" >
+                                    <div class="form-group">    
+                                        <form method="POST" action="NovoAluguel">
+                                        
+                                        <label>CPF</label>
+                                        <input type="text" class="form-control" name="cpf" placeholder="Insira seu CPF (Somente Numeros)" required>
+                                        <label>Veiculo</label>                                 
+                                        
+                                        <select type="text" class="form-control" name="veiculo">
+                                                                <c:forEach items="${lista}" var="lista">
+                                                <option value="${lista.modelo}">
+                                                    ${lista.modelo}
+                                                </option>
+                                            </c:forEach>
+                                        
+                                        </select>
+                                        <label>Dias</label>
+                                        <input type="number" class="form-control" name="tempoAluguel"required> 
+                                        <label>Custo total: </label>
+                                        <input type="text   "  class="form-control" name="custoTotal" required> <br />
 
-                <p>Cadastrar veiculo</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-car"></i>
-              </div>
-              <a href="http://localhost:8080/Carraws2/cadastroVeiculo.jsp" class="small-box-footer">
-                <i class="fa fa-arrow-circle-right"></i>
-              </a>
+                                               <!-- /.input group -->
+                                               <button type="submit" name="bOK"  class="btn btn-primary">Alugar</button>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
             </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-              <div class="inner">
-                <h3>Novo Funcionario</h3>
-
-                <p>Cadastrar funcionario</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-user"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-              <div class="inner">
-                <h3>Alugueis</h3>
-
-                <p>Alugueis efetuados</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-calendar"></i>
-              </div>
-              <a href="#" class="small-box-footer">
-                <i class="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>
-          </div>
-          <!-- ./col -->
-        </div>
-        
-    
-
+     
         <!-- /.row -->
         <!-- Main row -->
         <!-- /.row (main row) -->
 
       </section>
+      
+      
 
   <!-- <script src="dist/vendors.bundle.js"></script> -->
   <script src="${pageContext.request.contextPath}/dist/adminlte.min.js"></script>
