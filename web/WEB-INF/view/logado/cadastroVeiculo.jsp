@@ -110,7 +110,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
                         <li class="header">Navegação Principal</li>
-                        <li class="active treeview">
+ <li class="active treeview">
                             <a href="#">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Menu Principal</span>
@@ -119,6 +119,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+
                                 <li>
                                     <a href="/Carraws/logado/Alugueis.jsp">
                                         <i class="fa fa-circle-o"></i> Alugueis</a>
@@ -131,18 +132,25 @@
                                     <a href="/Carraws/logado/veiculos">
                                         <i class="fa fa-circle-o"></i> Veiculos</a>
                                 </li>
-                                <li>
-                                    <a href="/Carraws/logado/cadastroVeiculo.jsp">
-                                        <i class="fa fa-circle-o"></i> Novo Veiculo</a>
-                                </li>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
+
+                                    <li>
+                                        <a href="/Carraws/logado/cadastroVeiculo.jsp">
+                                            <i class="fa fa-circle-o"></i> Novo Veiculo</a>
+                                    </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/Clientes">
                                         <i class="fa fa-circle-o"></i> Clientes</a>
                                 </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/cadastroClientes.jsp">
                                         <i class="fa fa-circle-o"></i> Novo Cliente</a>
                                 </li>
+                                </c:if>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -218,7 +226,7 @@
                         <div class="box box-solid box-success" >
                             <div class="box-header box-header with-border 11" align="center">
                                 <h3 class="box-title">Novo Veiculo</h3>
-                                
+
                                 <h3> <p style="color:green">${novoAluguel}</p></h3>
                             </div>
                             <div class="box-body">

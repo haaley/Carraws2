@@ -7,11 +7,11 @@ package servlet;
 
 import Bean.Aluguel;
 import DAO.AluguelDAO;
-import DAO.UsuarioDAO;
 import DAO.VeiculoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -20,14 +20,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Erro;
 
 /**
  *
  * @author Thalicia Oliveira
  */
-@WebServlet(name = "NovoAluguel", urlPatterns = {"/logado/NovoAluguel"})
-public class NovoAluguel extends HttpServlet {
+@WebServlet(name = "calculaValor", urlPatterns = {"/logado/calculaValor"})
+public class calculaValor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,42 +42,16 @@ public class NovoAluguel extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Erro erros = new Erro();
-            
+            String veiculo = request.getParameter("veiculo");
+            int dias = Integer.parseInt(request.getParameter("tempoAluguel"));
+            System.out.println("Nome do veiculo" + veiculo + " dias: " + dias);
+            VeiculoDAO dao = new VeiculoDAO();
+            double valor = dao.veiculoValorByName(veiculo);
 
-            if (request.getParameter("bOK") != null) {
-                String cliente = request.getParameter("cpf");
-                String veiculo = request.getParameter("veiculo");
-                int dia = Integer.parseInt(request.getParameter("tempoAluguel"));
-                double custoTotal = Double.parseDouble(request.getParameter("custoTotal"));
-                AluguelDAO dao = new AluguelDAO();
-                VeiculoDAO daov = new VeiculoDAO();
-                UsuarioDAO daou = new UsuarioDAO();
-
-                int id = daou.userIDByName(cliente);
-
-                int idv = daov.veiculoIDByName(veiculo);
-
-                System.out.println(cliente + veiculo);
-
-                if (!erros.isExisteErros()) {
-
-                    Aluguel a = new Aluguel(id, idv, dia, custoTotal);
-
-                    if (a != null) {
-
-                        dao.inserirAlguel(a);
-
-                        request.setAttribute("novoAluguel",
-                                "<b>Veiculo Alugado com Sucesso!");
-                        RequestDispatcher rd = request.getRequestDispatcher("/logado/alugar");
-                        rd.forward(request, response);
-
-                    }
-                }
-
-            }
-
+            double custo = valor * dias;
+            request.setAttribute("listar", custo);
+            RequestDispatcher rd = request.getRequestDispatcher("/logado/alugar");
+            rd.forward(request, response);
         }
     }
 
@@ -96,9 +69,8 @@ public class NovoAluguel extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-
         } catch (SQLException ex) {
-            Logger.getLogger(novoVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(calculaValor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -116,7 +88,7 @@ public class NovoAluguel extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(novoVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(calculaValor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

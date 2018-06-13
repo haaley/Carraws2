@@ -120,6 +120,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+
                                 <li>
                                     <a href="/Carraws/logado/Alugueis.jsp">
                                         <i class="fa fa-circle-o"></i> Alugueis</a>
@@ -132,18 +133,25 @@
                                     <a href="/Carraws/logado/veiculos">
                                         <i class="fa fa-circle-o"></i> Veiculos</a>
                                 </li>
-                                <li>
-                                    <a href="/Carraws/logado/cadastroVeiculo.jsp">
-                                        <i class="fa fa-circle-o"></i> Novo Veiculo</a>
-                                </li>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
+
+                                    <li>
+                                        <a href="/Carraws/logado/cadastroVeiculo.jsp">
+                                            <i class="fa fa-circle-o"></i> Novo Veiculo</a>
+                                    </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/Clientes">
                                         <i class="fa fa-circle-o"></i> Clientes</a>
                                 </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/cadastroClientes.jsp">
                                         <i class="fa fa-circle-o"></i> Novo Cliente</a>
                                 </li>
+                                </c:if>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -229,11 +237,11 @@
                         <div class="box-body">
 
 
-                     
-                                <ul class="products-list product-list-in-box">
-                                  
-                                    <c:forEach var="lista" items="${lista}">
-                                        <li class="item">
+
+                            <ul class="products-list product-list-in-box">
+
+                                <c:forEach var="lista" items="${lista}">
+                                    <li class="item">
                                         <div class="product-info">
                                             <a href="javascript:void(0)" class="product-title"><c:out value="${lista.modelo}" />
                                                 <span class="label label-warning pull-right"><c:out value="${lista.placa}" /></span></a>
@@ -241,10 +249,10 @@
                                                 <c:out value="${lista.marca}" />
                                             </span>
                                         </div>
-                                            </li>
-                                    </c:forEach>
-                                    
-                                </ul>
+                                    </li>
+                                </c:forEach>
+
+                            </ul>
 
                         </div>
 

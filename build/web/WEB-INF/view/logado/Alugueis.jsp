@@ -139,14 +139,6 @@
                             </a>
                             <ul class="treeview-menu">
 
-
-                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
-                                    <li>
-                                        <a href="/Carraws/logado/Alugueis.jsp">
-                                            <i class="fa fa-circle-o"></i> Cadastrar Funcionario</a>
-                                    </li>
-                                </c:if>
-
                                 <li>
                                     <a href="/Carraws/logado/Alugueis.jsp">
                                         <i class="fa fa-circle-o"></i> Alugueis</a>
@@ -159,18 +151,25 @@
                                     <a href="/Carraws/logado/veiculos">
                                         <i class="fa fa-circle-o"></i> Veiculos</a>
                                 </li>
-                                <li>
-                                    <a href="/Carraws/logado/cadastroVeiculo.jsp">
-                                        <i class="fa fa-circle-o"></i> Novo Veiculo</a>
-                                </li>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
+
+                                    <li>
+                                        <a href="/Carraws/logado/cadastroVeiculo.jsp">
+                                            <i class="fa fa-circle-o"></i> Novo Veiculo</a>
+                                    </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/Clientes">
                                         <i class="fa fa-circle-o"></i> Clientes</a>
                                 </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/cadastroClientes.jsp">
                                         <i class="fa fa-circle-o"></i> Novo Cliente</a>
                                 </li>
+                                </c:if>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -226,15 +225,15 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Cadastro de Veiculo
-                        <small>Novo veiculo</small>
+                        List de Alugueis
+                        <small>Alugueis</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="#">
+                            <a href="/carraws/menu">
                                 <i class="fa fa-dashboard"></i>Principal</a>
                         </li>
-                        <li class="active">cadastro de veiculo</li>
+                        <li class="active">Alugueis</li>
                     </ol>
                 </section>
                 <br />

@@ -120,9 +120,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                
-                                 ${sessionScope.usuarioLogado.idlogin}
-                                
+
                                 <li>
                                     <a href="/Carraws/logado/Alugueis.jsp">
                                         <i class="fa fa-circle-o"></i> Alugueis</a>
@@ -135,18 +133,25 @@
                                     <a href="/Carraws/logado/veiculos">
                                         <i class="fa fa-circle-o"></i> Veiculos</a>
                                 </li>
-                                <li>
-                                    <a href="/Carraws/logado/cadastroVeiculo.jsp">
-                                        <i class="fa fa-circle-o"></i> Novo Veiculo</a>
-                                </li>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
+
+                                    <li>
+                                        <a href="/Carraws/logado/cadastroVeiculo.jsp">
+                                            <i class="fa fa-circle-o"></i> Novo Veiculo</a>
+                                    </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/Clientes">
                                         <i class="fa fa-circle-o"></i> Clientes</a>
                                 </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/cadastroClientes.jsp">
                                         <i class="fa fa-circle-o"></i> Novo Cliente</a>
                                 </li>
+                                </c:if>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -202,15 +207,15 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Cadastro de Veiculo
-                        <small>Novo veiculo</small>
+                        Clientes
+                        <small>Lista de Clientes</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li>
                             <a href="#">
                                 <i class="fa fa-dashboard"></i>Principal</a>
                         </li>
-                        <li class="active">cadastro de veiculo</li>
+                        <li class="active">Lista Clientes</li>
                     </ol>
                 </section>
                 <br />
@@ -220,7 +225,7 @@
 
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Lista de Veiculos</h3>
+                            <h3 class="box-title">Lista de Clientes</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -232,11 +237,11 @@
                         <div class="box-body">
 
 
-                     
-                                <ul class="products-list product-list-in-box">
-                                  
-                                    <c:forEach var="lista" items="${lista}">
-                                        <li class="item">
+
+                            <ul class="products-list product-list-in-box">
+
+                                <c:forEach var="lista" items="${lista}">
+                                    <li class="item">
                                         <div class="product-info">
                                             <a href="javascript:void(0)" class="product-title"><c:out value="${lista.nome}" />
                                                 <span class="label label-warning pull-right"><c:out value="${lista.cpf}" /></span></a>
@@ -244,10 +249,10 @@
                                                 <c:out value="${lista.email}" />
                                             </span>
                                         </div>
-                                            </li>
-                                    </c:forEach>
-                                    
-                                </ul>
+                                    </li>
+                                </c:forEach>
+
+                            </ul>
 
                         </div>
 

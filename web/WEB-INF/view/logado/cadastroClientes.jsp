@@ -119,6 +119,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
+
                                 <li>
                                     <a href="/Carraws/logado/Alugueis.jsp">
                                         <i class="fa fa-circle-o"></i> Alugueis</a>
@@ -131,18 +132,25 @@
                                     <a href="/Carraws/logado/veiculos">
                                         <i class="fa fa-circle-o"></i> Veiculos</a>
                                 </li>
-                                <li>
-                                    <a href="/Carraws/logado/cadastroVeiculo.jsp">
-                                        <i class="fa fa-circle-o"></i> Novo Veiculo</a>
-                                </li>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
+
+                                    <li>
+                                        <a href="/Carraws/logado/cadastroVeiculo.jsp">
+                                            <i class="fa fa-circle-o"></i> Novo Veiculo</a>
+                                    </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/Clientes">
                                         <i class="fa fa-circle-o"></i> Clientes</a>
                                 </li>
+                                </c:if>
+                                <c:if test = "${sessionScope.usuarioLogado.nivelAcesso>'0'}">
                                 <li>
                                     <a href="/Carraws/logado/cadastroClientes.jsp">
                                         <i class="fa fa-circle-o"></i> Novo Cliente</a>
                                 </li>
+                                </c:if>
                             </ul>
                         </li>
                         <li class="treeview">
@@ -239,7 +247,7 @@
                                                 <input type="text" class="form-control" name="cidade" placeholder="Insira sua cidade" required>
                                                 <label>CNH</label>
                                                 <input type="text" class="form-control" name="cnh" placeholder="Insira o numero da sua carteira de motorista"  required><br />
-                                                 <p style="color:green">${profilestrength}</p>
+                                                <p style="color:green">${profilestrength}</p>
 
                                                 <!-- /.input group -->
                                                 <button type="submit" name="bOK" class="btn btn-primary">Cadastrar</button>

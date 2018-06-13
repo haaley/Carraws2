@@ -40,6 +40,7 @@ public class AlugarServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
                     VeiculoDAO dao = new VeiculoDAO();
 //            ArrayList<String> list = dao.listarModelos();
+            request.getParameter("");
             ArrayList<Veiculo> list = dao.listarVeiculos();
             
             request.setAttribute("lista", list);

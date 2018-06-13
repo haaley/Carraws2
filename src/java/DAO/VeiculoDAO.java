@@ -105,5 +105,23 @@ public class VeiculoDAO {
         
     
     }
+    
+    
+        public double veiculoValorByName(String nome) throws SQLException {
+        Connection conn = Conexao.open();
+        double valor;
+        PreparedStatement ps;
+        ResultSet rs;
+
+        ps = conn.prepareStatement("select valor from veiculo where modelo LIKE '" + nome + "'");
+        rs = ps.executeQuery();
+        rs.beforeFirst();
+        rs.first();
+        valor = rs.getDouble("valor");
+
+        return valor;
+        
+    
+    }
 
 }
